@@ -79,4 +79,6 @@ plt.figure(1)
 plt.clf
 plt.plot(y,m,color="g",label="condiciones iniciales: dy/ds=0, y=4")
 plt.legend(loc='lower right',prop={'size':10})
+
+plt.savefig("Van der pol.png")
 plt.show()
