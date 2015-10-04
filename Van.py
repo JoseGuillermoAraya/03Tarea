@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 '''Script que realiza RK3 para integrar la ecuación de van der Pol
 y grafica el resultado'''
 
@@ -36,12 +38,12 @@ def avanzar_rk3 (y_n,m_n,h,f):
     return y_n1,m_n1
 '''-------------------------------------------------------------------------------------------'''
 
-'''condiciones iniciales'''
+'''condiciones iniciales m0=0 y0=0.1'''
 m0 = 0
 y0 = 0.1
 
 n_pasos = 1000
-h = 20. / n_pasos
+h = 20*np.pi / n_pasos
 y = np.zeros(n_pasos)
 m = np.zeros(n_pasos)
 
@@ -50,3 +52,8 @@ m[0] = m0
 
 for i in range(1,n_pasos):
     (y[i],m[i]) = avanzar_rk3(y[i-1],m[i-1],h,f)
+
+plt.figure(1)
+plt.clf
+plt.plot(y,m,color="r")
+plt.show()
