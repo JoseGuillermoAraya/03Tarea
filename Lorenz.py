@@ -47,3 +47,36 @@ ax.set_zlabel('z')
 plt.title("Atractor de Lorenz")
 fig.savefig("Lorenz.png")
 fig.show()
+
+'''condiciones iniciales'''
+x0 = 10
+y0 = 10
+z0 = 10
+
+solucion=ode(f).set_integrator("dopri5")
+solucion.set_initial_value([x0,y0,z0],0)
+
+t1 = 100
+dt = 0.01
+pasos = t1/dt +1
+i = 0
+t_n = np.zeros(pasos)
+sol_n = [np.zeros(pasos),np.zeros(pasos),np.zeros(pasos)]
+while solucion.successful() and solucion.t < t1:
+    t_n[i],(sol_n[0][i],sol_n[1][i],sol_n[2][i])=[solucion.t,(solucion.integrate(solucion.t+dt))]
+    i += 1
+
+fig = plt.figure(2)
+fig.clf()
+
+ax = fig.add_subplot(111, projection='3d')
+ax.set_aspect('equal')
+
+ax.plot(sol_n[0],sol_n[1] ,sol_n[2] )
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+plt.title("Atractor de Lorenz")
+fig.savefig("Lorenz2.png")
+fig.show()
