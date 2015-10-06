@@ -55,12 +55,13 @@ for i in range(1,n_pasos):
 
 plt.figure(1)
 plt.clf
+plt.subplot(311)
 plt.plot(y_1,m_1,color="r",label="condiciones iniciales: dy/ds=0, y=0.1")
 plt.xlabel('$y$', fontsize=20)
 plt.ylabel("$\\frac{dy}{ds}$",fontsize=20)
 plt.legend(loc='lower right',prop={'size':10})
-plt.title("Oscilador de Van der Pol")
-plt.savefig("Van der pol1.png")
+plt.title("Trayectoria oscilador de Van der Pol")
+
 '''condiciones iniciales m0=0 y0=4'''
 m0 = 0
 y0 = 4
@@ -76,23 +77,32 @@ m_2[0] = m0
 for i in range(1,n_pasos):
     (y_2[i],m_2[i]) = avanzar_rk3(y_2[i-1],m_2[i-1],h,f)
 
+plt.subplot(312)
+plt.plot(y_2,m_2,color="g",label="condiciones iniciales: dy/ds=0, y=4")
+plt.xlabel('$y$', fontsize=20)
+plt.ylabel("$\\frac{dy}{ds}$",fontsize=20)
+plt.legend(loc='lower right',prop={'size':10})
+
+plt.subplot(313)
+plt.plot(y_2,m_2,color="g",label="condiciones iniciales: dy/ds=0, y=4")
+plt.plot(y_1,m_1,color="r",label="condiciones iniciales: dy/ds=0, y=0.1")
+plt.xlabel('$y$', fontsize=20)
+plt.ylabel("$\\frac{dy}{ds}$",fontsize=20)
+plt.legend(loc='lower right',prop={'size':10})
+plt.savefig("van.png")
+
+s_values=np.linspace(1,20*np.pi,n_pasos)
+
 plt.figure(2)
-plt.clf
-plt.plot(y_2,m_2,color="g",label="condiciones iniciales: dy/ds=0, y=4")
-plt.xlabel('$y$', fontsize=20)
-plt.ylabel("$\\frac{dy}{ds}$",fontsize=20)
-plt.legend(loc='lower right',prop={'size':10})
-plt.title("Oscilador de Van der Pol")
-plt.savefig("Van der pol2.png")
+plt.subplot(211)
+plt.title("y(s) para condiciones iniciales: dy/ds=0, y=0.1")
+plt.plot(s_values,y_1,color="r")
+plt.ylabel("y(s)")
 
-plt.figure(3)
-plt.clf
-plt.plot(y_2,m_2,color="g",label="condiciones iniciales: dy/ds=0, y=4")
-plt.plot(y_1,m_1,color="r",label="condiciones iniciales: dy/ds=0, y=4")
-plt.xlabel('$y$', fontsize=20)
-plt.ylabel("$\\frac{dy}{ds}$",fontsize=20)
-plt.legend(loc='lower right',prop={'size':10})
-plt.title("Oscilador de Van der Pol")
-plt.savefig("Van der pol3.png")
-
+plt.subplot(212)
+plt.title("y(s) para condiciones iniciales: dy/ds=0, y=4")
+plt.plot(s_values,y_2,color="g")
+plt.xlabel("s")
+plt.ylabel("y(s)")
+plt.savefig("van2.png")
 plt.show()
